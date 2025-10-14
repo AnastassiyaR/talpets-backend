@@ -19,6 +19,7 @@ bin/
 
 ### IntelliJ IDEA ###
 .idea
+/postgres-data
 *.iws
 *.iml
 *.ipr

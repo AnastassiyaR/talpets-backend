@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: talpets
+    password: talpets
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
+
+jwt:
+  secret: local-jwt-secret-key-for-development-123
+
+server:
+  port: 8080

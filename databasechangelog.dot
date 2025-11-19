@@ -1,0 +1,14 @@
+digraph "databasechangelog" {
+
+splines  = ortho;
+fontname = "Inconsolata";
+
+node [colorscheme = ylgnbu4];
+edge [colorscheme = dark28, dir = both];
+
+databasechangelog                               [shape = record, pos = "-2.174,7.826!"    , label = "{ databasechangelog |  id : varchar(255)\l  author : varchar(255)\l  filename : varchar(255)\l  dateexecuted : timestamp\l  orderexecuted : integer\l  exectype : varchar(10)\l  md5sum : varchar(35)\l  description : varchar(255)\l  comments : varchar(255)\l  tag : varchar(255)\l  liquibase : varchar(20)\l  contexts : varchar(255)\l  labels : varchar(255)\l  deployment_id : varchar(10)\l }"];
+databasechangeloglock                           [shape = record, pos = "-2.069,13.111!"   , label = "{ databasechangeloglock |  locked : boolean\l  lockgranted : timestamp\l  lockedby : varchar(255)\l| id : integer\l }"];
+"users  /* Таблица пользователей приложения */" [shape = record, pos = "-0.417,10.500!"   , label = "{ users  /* Таблица пользователей приложения */ |  email : text\l  first_name : text\l  last_name : text\l  password : text\l| id : integer\l }"];
+
+
+}

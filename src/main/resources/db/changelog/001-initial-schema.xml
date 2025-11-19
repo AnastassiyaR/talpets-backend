@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="2025-09-10-create-users-table" author="nastya">
+        <createTable tableName="users" remarks="Таблица пользователей приложения">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="first_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2025-11-12-create-enums" author="nastya">
+        <sql>
+            CREATE TYPE size_type AS ENUM ('XS', 'S', 'M', 'L', 'XL');
+            CREATE TYPE pet_type AS ENUM ('Cat', 'Dog', 'Rodents');
+        </sql>
+        <rollback>
+            DROP TYPE IF EXISTS size_type;
+            DROP TYPE IF EXISTS pet_type;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2025-11-12-create-products-table" author="nastya">
+        <createTable tableName="products">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="size" type="size_type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pet" type="pet_type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="img" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

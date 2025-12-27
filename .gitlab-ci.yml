@@ -1,0 +1,59 @@
+stages:
+  - build
+  - dockerize
+  - deploy
+
+variables:
+  DOCKER_REGISTRY: docker.io
+
+
+build:
+  stage: build
+  image: gradle:jdk21
+  services:
+    - docker:dind
+  variables:
+#    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  cache:
+    paths:
+      - .gradle/caches
+      - .gradle/wrapper
+  script:
+    - chmod +x ./gradlew
+    - ./gradlew clean build
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
+dockerize:
+  stage: dockerize
+  image: docker:latest
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - |
+      echo "DOCKER_REGISTRY: $DOCKER_REGISTRY"
+      echo "DOCKER_IMAGE: $DOCKER_IMAGE"
+      echo "CI_COMMIT_SHORT_SHA: $CI_COMMIT_SHORT_SHA"
+      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin $DOCKER_REGISTRY
+      docker build -t $DOCKER_REGISTRY/$DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA .
+      docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA
+      docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_IMAGE:latest
+      docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:latest
+
+deploy:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "
+      cd /opt/iti0302 &&
+      docker-compose pull &&
+      docker-compose down &&
+      docker-compose up -d"

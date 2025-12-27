@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="2025-11-28-create-payment-cards-table" author="nadja">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="payment_cards"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="payment_cards">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_holder_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_month" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_year" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_four_digits" type="varchar(4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_default" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2025-11-28-add-payment-cards-indexes" author="nadja">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_payment_cards_user_id"/>
+            </not>
+        </preConditions>
+
+        <createIndex tableName="payment_cards" indexName="idx_payment_cards_user_id">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="2025-11-28-add-fk-payment-card-user" author="nadja">
+        <addForeignKeyConstraint
+                baseTableName="payment_cards"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                constraintName="fk_payment_card_user"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="2025-11-21-create-cart-table" author="nastya">
+        <createTable tableName="cart">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="quantity" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="selected_size" type="text"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="cart"
+                baseColumnNames="user_id"
+                constraintName="fk_cart_user"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="cart"
+                baseColumnNames="product_id"
+                constraintName="fk_cart_product"
+                referencedTableName="products"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2025-11-21-add-cart-indexes" author="nastya">
+        <createIndex tableName="cart" indexName="idx_cart_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex tableName="cart" indexName="idx_cart_product_id">
+            <column name="product_id"/>
+        </createIndex>
+
+        <createIndex tableName="cart" indexName="idx_cart_user_product_size" unique="true">
+            <column name="user_id"/>
+            <column name="product_id"/>
+            <column name="selected_size"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

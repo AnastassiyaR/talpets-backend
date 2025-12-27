@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="2025-11-21-insert-initial-products" author="nadine">
+        <insert tableName="products">
+            <column name="name" value="Collar"/>
+            <column name="size" value="M"/>
+            <column name="pet" value="CAT"/>
+            <column name="color" value="Yellow"/>
+            <column name="price" value="15.99"/>
+            <column name="img" value="collar.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Bow"/>
+            <column name="size" value="S"/>
+            <column name="pet" value="DOG"/>
+            <column name="color" value="Pink"/>
+            <column name="price" value="8.99"/>
+            <column name="img" value="bow.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Sunglasses"/>
+            <column name="size" value="XS"/>
+            <column name="pet" value="CAT"/>
+            <column name="color" value="Pink"/>
+            <column name="price" value="12.99"/>
+            <column name="img" value="sunglases.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Balls"/>
+            <column name="size" value="L"/>
+            <column name="pet" value="DOG"/>
+            <column name="color" value="Yellow"/>
+            <column name="price" value="14.99"/>
+            <column name="img" value="balls.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Collar Purple"/>
+            <column name="size" value="S"/>
+            <column name="pet" value="CAT"/>
+            <column name="color" value="Purple"/>
+            <column name="price" value="16.99"/>
+            <column name="img" value="collar2.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Cat's outfit Pink"/>
+            <column name="size" value="M"/>
+            <column name="pet" value="CAT"/>
+            <column name="color" value="Pink"/>
+            <column name="price" value="29.99"/>
+            <column name="img" value="cat's outfit.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Cat's outfit Yellow"/>
+            <column name="size" value="M"/>
+            <column name="pet" value="CAT"/>
+            <column name="color" value="Yellow"/>
+            <column name="price" value="29.99"/>
+            <column name="img" value="cat's outfit2.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Dog's outfit Yellow"/>
+            <column name="size" value="L"/>
+            <column name="pet" value="DOG"/>
+            <column name="color" value="Yellow"/>
+            <column name="price" value="34.99"/>
+            <column name="img" value="Dogs' Outfit.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Dog's outfit Blue"/>
+            <column name="size" value="L"/>
+            <column name="pet" value="DOG"/>
+            <column name="color" value="Blue"/>
+            <column name="price" value="34.99"/>
+            <column name="img" value="Dogs' Outfit2.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Dog's outfit Black"/>
+            <column name="size" value="L"/>
+            <column name="pet" value="DOG"/>
+            <column name="color" value="Black"/>
+            <column name="price" value="34.99"/>
+            <column name="img" value="dog's outfit3.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Rabbit's outfit Pink"/>
+            <column name="size" value="S"/>
+            <column name="pet" value="RODENTS"/>
+            <column name="color" value="Pink"/>
+            <column name="price" value="24.99"/>
+            <column name="img" value="Rabbits' Outfit.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Rabbit's outfit Yellow"/>
+            <column name="size" value="M"/>
+            <column name="pet" value="RODENTS"/>
+            <column name="color" value="Yellow"/>
+            <column name="price" value="24.99"/>
+            <column name="img" value="rabbit outfit2.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Food bowl Blue"/>
+            <column name="size" value="M"/>
+            <column name="pet" value="CAT"/>
+            <column name="color" value="Blue"/>
+            <column name="price" value="19.99"/>
+            <column name="img" value="Foodbowl.png"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Food bowl Yellow"/>
+            <column name="size" value="S"/>
+            <column name="pet" value="DOG"/>
+            <column name="color" value="Yellow"/>
+            <column name="price" value="18.99"/>
+            <column name="img" value="food bowl2.png"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

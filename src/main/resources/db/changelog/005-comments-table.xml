@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="2025-11-22-create-comments-table" author="nadia">
+        <createTable tableName="comments">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="integer">
+                <constraints nullable="false"
+                             foreignKeyName="fk_comment_product"
+                             references="products(id)"/>
+            </column>
+            <column name="comment_text" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_comment_user"
+                             references="users(id)"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2025-11-22-add-comments-indexes" author="nadia">
+        <createIndex tableName="comments" indexName="idx_comments_product_id">
+            <column name="product_id"/>
+        </createIndex>
+        <createIndex tableName="comments" indexName="idx_comments_user_id">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex tableName="comments" indexName="idx_comments_created_date">
+            <column name="created_date"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="2025-11-22-create-wishlist-table" author="nastya">
+        <createTable tableName="wishlist">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_wishlist_user"
+                             references="users(id)"
+                             deleteCascade="true"/>
+            </column>
+            <column name="product_id" type="integer">
+                <constraints nullable="false"
+                             foreignKeyName="fk_wishlist_product"
+                             references="products(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2025-11-22-add-wishlist-indexes" author="nastya">
+        <createIndex tableName="wishlist" indexName="idx_wishlist_user_id">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex tableName="wishlist" indexName="idx_wishlist_product_id">
+            <column name="product_id"/>
+        </createIndex>
+        <createIndex tableName="wishlist" indexName="idx_wishlist_user_product" unique="true">
+            <column name="user_id"/>
+            <column name="product_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

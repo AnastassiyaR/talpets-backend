@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="2025-12-01-create-pets-table" author="nastya">
+        <createTable tableName="pets">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="text"/>
+            <column name="breed" type="text"/>
+            <column name="gender" type="text"/>
+            <column name="birthday" type="date"/>
+            <column name="age" type="text"/>
+            <column name="description" type="text"/>
+            <column name="photo" type="text"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="pets"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_pets_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+        <createIndex indexName="idx_pets_user_id" tableName="pets">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

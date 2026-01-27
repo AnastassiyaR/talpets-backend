@@ -126,6 +126,9 @@ docker rm talpets-backend
 * Lombok
 * Liquibase (database migrations)
 
+**Domain:**
+* No-IP
+
 ---
 
 ## Project introduction/purpose
